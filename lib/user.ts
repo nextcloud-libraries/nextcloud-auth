@@ -1,25 +1,23 @@
-/// <reference types="@nextcloud/typings" />
+const uidElement = document
+	.getElementsByTagName('head')[0]
+const uid = uidElement ? uidElement.getAttribute('data-user') : null
 
-type OC16to17 = Nextcloud.v16.OC | Nextcloud.v17.OC
-declare var OC: OC16to17;
+const displayNameElement = document
+	.getElementsByTagName('head')[0]
+const displayName = displayNameElement ? displayNameElement.getAttribute('data-user-displayname') : null
 
 export interface NextcloudUser {
 	uid: String,
 	displayName: String | null
 }
 
-/**
- * @todo inline https://github.com/nextcloud/server/blob/master/core/src/OC/currentuser.js
- */
 export function getCurrentUser(): NextcloudUser | null {
-	const user = OC.getCurrentUser()
-
-	if (user.uid === false) {
+	if (uid === null) {
 		return null
 	}
 
 	return {
-		uid: user.uid,
-		displayName: user.displayName,
+		uid,
+		displayName,
 	} as NextcloudUser
 }

@@ -1,8 +1,28 @@
-/// <reference types="@nextcloud/typings" />
+const tokenElement = document.getElementsByTagName('head')[0]
+let token = tokenElement ? tokenElement.getAttribute('data-requesttoken') : null
 
-type OC16to17 = Nextcloud.v16.OC | Nextcloud.v17.OC
-declare var OC: OC16to17;
+interface CsrfTokenObserver {
+	(token: string): void;
+}
 
-export function getRequestToken(): string {
-	return OC.requestToken
+const observers: Array<CsrfTokenObserver> = []
+
+export function getRequestToken(): string | null {
+	return token
+}
+
+export function onRequestTokenUpdate(observer: CsrfTokenObserver): void {
+	observers.push(observer)
+}
+
+export function setRequestToken(newToken: string) {
+	token = newToken
+
+	observers.forEach(observer => {
+		try {
+			observer(newToken)
+		} catch (e) {
+			console.error('error updating CSRF token observer', e)
+		}
+	})
 }
