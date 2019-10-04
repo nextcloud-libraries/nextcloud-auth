@@ -30,7 +30,7 @@
     "@babel/preset-typescript": "7.6.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "browserslist-config-nextcloud": "0.0.1",
-    "typescript": "3.5.2"
+    "typescript": "3.6.3"
   },
   "browserslist": [
     "extends browserslist-config-nextcloud"
