@@ -8,7 +8,8 @@
     "build": "babel ./lib --out-dir dist --extensions '.ts,.tsx' --source-maps && tsc --emitDeclarationOnly",
     "check-types": "tsc",
     "dev": "babel ./lib --out-dir dist --extensions '.ts,.tsx' --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "keywords": [
     "nextcloud"
@@ -29,8 +30,10 @@
     "@babel/core": "7.6.2",
     "@babel/preset-env": "7.6.2",
     "@babel/preset-typescript": "7.6.0",
+    "babel-jest": "^24.9.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "browserslist-config-nextcloud": "0.0.1",
+    "jest": "^24.9.0",
     "typescript": "3.6.3"
   },
   "browserslist": [
