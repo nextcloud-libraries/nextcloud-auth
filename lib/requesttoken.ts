@@ -1,3 +1,5 @@
+import { subscribe } from '@nextcloud/event-bus'
+
 const tokenElement = document.getElementsByTagName('head')[0]
 let token = tokenElement ? tokenElement.getAttribute('data-requesttoken') : null
 
@@ -15,14 +17,15 @@ export function onRequestTokenUpdate(observer: CsrfTokenObserver): void {
 	observers.push(observer)
 }
 
-export function setRequestToken(newToken: string) {
-	token = newToken
+// Listen to server event and keep token in sync
+subscribe('csrf-token-update', e => {
+	token = e.token
 
 	observers.forEach(observer => {
 		try {
-			observer(newToken)
+			observer(e.token)
 		} catch (e) {
 			console.error('error updating CSRF token observer', e)
 		}
 	})
-}
+})

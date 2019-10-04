@@ -9,6 +9,6 @@
             "es6",
             "dom"
         ],
-        "noImplicitAny": false,
+        "noImplicitAny": false
     }
 }
