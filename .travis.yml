@@ -3,6 +3,7 @@ node_js: node
 branches:
   only:
   - master
+  - /^v\d++(\.\d+)?+(\.\d+)?+(\.\d+)?$/
 script:
   - npm run build
   - npm run test
