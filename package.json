@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@nextcloud/event-bus": "^0.2.0",
-    "core-js": "3.5.0"
+    "core-js": "3.6.0"
   },
   "devDependencies": {
     "@babel/cli": "7.7.5",
