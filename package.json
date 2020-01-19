@@ -36,7 +36,7 @@
     "babel-plugin-transform-class-properties": "6.24.1",
     "browserslist-config-nextcloud": "0.1.0",
     "jest": "^24.9.0",
-    "typedoc": "^0.15.7",
+    "typedoc": "^0.16.7",
     "typescript": "3.7.4"
   },
   "browserslist": [
