@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>&quot;user&quot; | @nextcloud/auth</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for @nextcloud/auth">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -79,8 +79,10 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_user_.html#oc" class="tsd-kind-icon">OC</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_user_.html#displayname" class="tsd-kind-icon">display<wbr>Name</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_user_.html#displaynameelement" class="tsd-kind-icon">display<wbr>Name<wbr>Element</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_user_.html#isadmin" class="tsd-kind-icon">is<wbr>Admin</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_user_.html#uid" class="tsd-kind-icon">uid</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_user_.html#uidelement" class="tsd-kind-icon">uid<wbr>Element</a></li>
 							</ul>
@@ -97,12 +99,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="oc" class="tsd-anchor"></a>
+					<h3>OC</h3>
+					<div class="tsd-signature tsd-kind-icon">OC<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">OC</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">OC</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">OC</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">OC</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/c024e41/lib/user.ts#L3">user.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="displayname" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> display<wbr>Name</h3>
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = displayNameElement ? displayNameElement.getAttribute(&#x27;data-user-displayname&#x27;) : null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/85c5fc1/lib/user.ts#L7">user.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/c024e41/lib/user.ts#L11">user.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -112,7 +124,17 @@
 					<div class="tsd-signature tsd-kind-icon">display<wbr>Name<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLHeadElement</span><span class="tsd-signature-symbol"> = document.getElementsByTagName(&#x27;head&#x27;)[0]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/85c5fc1/lib/user.ts#L5">user.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/c024e41/lib/user.ts#L9">user.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="isadmin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Admin</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Admin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = (typeof OC &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27;)? false: OC.isUserAdmin()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/c024e41/lib/user.ts#L13">user.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -122,7 +144,7 @@
 					<div class="tsd-signature tsd-kind-icon">uid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = uidElement ? uidElement.getAttribute(&#x27;data-user&#x27;) : null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/85c5fc1/lib/user.ts#L3">user.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/c024e41/lib/user.ts#L7">user.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,7 +154,7 @@
 					<div class="tsd-signature tsd-kind-icon">uid<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLHeadElement</span><span class="tsd-signature-symbol"> = document.getElementsByTagName(&#x27;head&#x27;)[0]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/85c5fc1/lib/user.ts#L1">user.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/c024e41/lib/user.ts#L5">user.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -149,7 +171,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/85c5fc1/lib/user.ts#L14">user.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/nextcloud/nextcloud-auth/blob/c024e41/lib/user.ts#L23">user.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_user_.nextclouduser.html" class="tsd-signature-type">NextcloudUser</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -181,10 +203,16 @@
 						<a href="../interfaces/_user_.nextclouduser.html" class="tsd-kind-icon">Nextcloud<wbr>User</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_user_.html#oc" class="tsd-kind-icon">OC</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="_user_.html#displayname" class="tsd-kind-icon">display<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="_user_.html#displaynameelement" class="tsd-kind-icon">display<wbr>Name<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_user_.html#isadmin" class="tsd-kind-icon">is<wbr>Admin</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="_user_.html#uid" class="tsd-kind-icon">uid</a>
