@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.3.0 - 2020-06-04
+### Added
+- isAdmin prop to the user object
+### Changed
+- Dependency updates
+
 ## 1.2.3 - 2020-04-06
 ### Changed
 - Dependency updates
