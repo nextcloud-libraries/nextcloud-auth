@@ -23,7 +23,7 @@
     "url": "https://github.com/nextcloud/nextcloud-auth"
   },
   "dependencies": {
-    "@nextcloud/event-bus": "^1.1.3",
+    "@nextcloud/event-bus": "^2.0.0",
     "@nextcloud/typings": "^1.0.0",
     "core-js": "^3.6.4"
   },
