@@ -36,7 +36,7 @@
     "babel-jest": "^27.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "jest": "^27.0.6",
-    "typedoc": "^0.21.4",
+    "typedoc": "^0.22.1",
     "typescript": "^4.0.2"
   },
   "browserslist": [
