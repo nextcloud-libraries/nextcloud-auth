@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { getRequestToken, onRequestTokenUpdate } from '../lib/index'
 import { emit } from '@nextcloud/event-bus'
 
