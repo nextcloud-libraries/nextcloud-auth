@@ -1,16 +1,14 @@
 {
-    "include": [
-        "./lib/**/*.ts"
-    ],
-    "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "moduleResolution": "node",
-        "target": "ESNext",
-        "module": "esnext",
-        "declaration": true,
-        "strict": true,
-        "noImplicitAny": false,
-        "outDir": "./dist",
-        "lib": ["DOM"]
-    }
+  "include": ["./lib/**/*.ts"],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "esnext",
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "outDir": "./dist",
+    "lib": ["DOM"]
+  }
 }
