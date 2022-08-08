@@ -5,15 +5,22 @@ declare var OC: Nextcloud.v16.OC
 	| Nextcloud.v18.OC
 	| Nextcloud.v19.OC
 	| Nextcloud.v20.OC
+	| Nextcloud.v21.OC
+	| Nextcloud.v22.OC
+	| Nextcloud.v20.OC
 	| Nextcloud.v24.OC;
 
-const uidElement = document
-	.getElementsByTagName('head')[0]
-const uid = uidElement ? uidElement.getAttribute('data-user') : null
+const getAttribute = (el: HTMLHeadElement | undefined, attribute: string): string | null => {
+	if (el) {
+		return el.getAttribute(attribute)
+	}
 
-const displayNameElement = document
-	.getElementsByTagName('head')[0]
-const displayName = displayNameElement ? displayNameElement.getAttribute('data-user-displayname') : null
+	return null
+}
+
+const head = document.getElementsByTagName('head')[0]
+const uid = getAttribute(head, 'data-user')
+const displayName = getAttribute(head, 'data-user-displayname')
 
 const isAdmin = (typeof OC === 'undefined')
 	? false
