@@ -2,6 +2,9 @@
 
 Nextcloud helpers related to authentication and the current user
 
+[![npm](https://img.shields.io/npm/v/@nextcloud/auth.svg)](https://www.npmjs.com/package/@nextcloud/auth)
+[![Documentation](https://img.shields.io/badge/Documentation-online-brightgreen)](https://nextcloud.github.io/nextcloud-auth/index.html)
+
 ## Install
 
 ```sh

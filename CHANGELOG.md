@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.0.0 - Draft
+## 2.0.0 - 2022-08-11
 ### Added
 - Rollup as bundler
 - ESM bundle
