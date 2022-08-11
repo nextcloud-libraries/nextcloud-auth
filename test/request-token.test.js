@@ -1,5 +1,8 @@
-import { getRequestToken, onRequestTokenUpdate } from '../lib/index'
-import { emit } from '@nextcloud/event-bus'
+/**
+ * @jest-environment jsdom
+ */
+const { getRequestToken, onRequestTokenUpdate } = require('../dist')
+const { emit } = require('@nextcloud/event-bus')
 
 describe('request token', () => {
     beforeEach(() => {

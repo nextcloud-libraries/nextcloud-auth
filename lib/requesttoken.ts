@@ -3,11 +3,11 @@ import { subscribe } from '@nextcloud/event-bus'
 const tokenElement = document.getElementsByTagName('head')[0]
 let token = tokenElement ? tokenElement.getAttribute('data-requesttoken') : null
 
-interface CsrfTokenObserver {
+export interface CsrfTokenObserver {
 	(token: string): void;
 }
 
-const observers: Array<CsrfTokenObserver> = []
+const observers: CsrfTokenObserver[] = []
 
 export function getRequestToken(): string | null {
 	return token

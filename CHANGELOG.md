@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 - Draft
+### Added
+- Rollup as bundler
+- ESM bundle
+
+### Changed
+- Remove core-js
+- Remove babel
+- Remove unnecessary dev dependencies
+- README.md
+
 ## 1.3.0 - 2020-06-04
 ### Added
 - isAdmin prop to the user object
