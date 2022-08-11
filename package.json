@@ -1,6 +1,6 @@
 {
   "name": "@nextcloud/auth",
-  "version": "2.0.0-next",
+  "version": "2.0.0",
   "description": "Nextcloud helpers related to authentication and the current user",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

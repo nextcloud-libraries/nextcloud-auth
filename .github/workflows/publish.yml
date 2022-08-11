@@ -1,0 +1,51 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔒​ Check actor permission level
+        uses: skjnldsv/check-actor-permission@v2
+        with:
+          require: admin
+
+      - name: 📥​ Checkout
+        uses: actions/checkout@v3
+
+      - name: 🪄 Read package.json node and npm engines version
+        uses: skjnldsv/read-package-engines-version-actions@v1.2
+        id: versions
+        with:
+          fallbackNode: '^16'
+          fallbackNpm: '^8'
+
+      - name: 🔧​ Setup Node (NPM Registry)
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ steps.versions.outputs.nodeVersion }}
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 📦 Install dependencies & build
+        run: |
+          npm ci
+          npm run build
+
+      - name: 📣 Publish package on NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: 🔧​ Setup Github Registry
+        uses: actions/setup-node@v3
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: 📣 Publish package on GPR
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
