@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@nextcloud/typings": "^1.4.3",
-    "@rollup/plugin-typescript": "^8.3.4",
+    "@rollup/plugin-typescript": "^8.4.0",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
     "rollup": "^2.78.1",
