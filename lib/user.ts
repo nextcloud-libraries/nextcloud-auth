@@ -27,9 +27,9 @@ const isAdmin = (typeof OC === 'undefined')
 	: OC.isUserAdmin()
 
 export interface NextcloudUser {
-	uid: String,
-	displayName: String | null,
-	isAdmin: Boolean,
+	uid: string,
+	displayName: string | null,
+	isAdmin: boolean,
 }
 
 export function getCurrentUser(): NextcloudUser | null {
