@@ -1,14 +1,8 @@
 /// <reference types="@nextcloud/typings" />
 
-declare var OC: Nextcloud.v16.OC
-	| Nextcloud.v17.OC
-	| Nextcloud.v18.OC
-	| Nextcloud.v19.OC
-	| Nextcloud.v20.OC
-	| Nextcloud.v21.OC
-	| Nextcloud.v22.OC
-	| Nextcloud.v20.OC
-	| Nextcloud.v24.OC;
+declare var OC: Nextcloud.v23.OC
+	| Nextcloud.v24.OC
+	| Nextcloud.v25.OC;
 
 const getAttribute = (el: HTMLHeadElement | undefined, attribute: string): string | null => {
 	if (el) {
@@ -18,13 +12,7 @@ const getAttribute = (el: HTMLHeadElement | undefined, attribute: string): strin
 	return null
 }
 
-const head = document.getElementsByTagName('head')[0]
-const uid = getAttribute(head, 'data-user')
-const displayName = getAttribute(head, 'data-user-displayname')
-
-const isAdmin = (typeof OC === 'undefined')
-	? false
-	: OC.isUserAdmin()
+let currentUser: NextcloudUser | null | undefined = undefined
 
 export interface NextcloudUser {
 	uid: string,
@@ -33,13 +21,27 @@ export interface NextcloudUser {
 }
 
 export function getCurrentUser(): NextcloudUser | null {
-	if (uid === null) {
+	if (currentUser !== undefined) {
+		return currentUser
+	}
+
+	const head = document?.getElementsByTagName('head')[0]
+	if (!head) {
 		return null
 	}
 
-	return {
+	// No user logged in so cache and return null
+	const uid = getAttribute(head, 'data-user')
+	if (uid === null) {
+		currentUser = null
+		return currentUser
+	}
+
+	currentUser = {
 		uid,
-		displayName,
-		isAdmin,
+		displayName: getAttribute(head, 'data-user-displayname'),
+		isAdmin: (typeof OC === 'undefined') ? false : OC.isUserAdmin(),
 	} as NextcloudUser
+
+	return currentUser
 }
