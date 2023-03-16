@@ -26,7 +26,7 @@ export default [
     plugins: [typescript()],
     output: [
       {
-        file: 'dist/index.esm.js',
+        file: 'dist/index.es.mjs',
         format: 'esm',
         sourcemap: true,
       },

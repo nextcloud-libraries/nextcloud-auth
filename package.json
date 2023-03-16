@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "Nextcloud helpers related to authentication and the current user",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "import": "./dist/index.esm.js",
-    "require": "./dist/index.js"
+    "import": "./dist/index.es.mjs",
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
   },
   "files": [
     "dist/"
