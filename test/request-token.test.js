@@ -12,7 +12,7 @@ describe('request token', () => {
     })
 
     test('updates token via event', () => {
-        expect(getRequestToken()).toBe(undefined)
+        expect(getRequestToken()).toBe(null)
     })
 
     test('find correct value', () => {
