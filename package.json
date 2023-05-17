@@ -5,18 +5,18 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
+    "types": "./dist/index.d.ts",
     "import": "./dist/index.es.mjs",
-    "require": "./dist/index.js",
-    "types": "./dist/index.d.ts"
+    "require": "./dist/index.js"
   },
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "rollup --config rollup.config.js",
+    "build": "rollup --config rollup.config.mjs",
     "build:doc": "typedoc --out dist/doc lib/index.ts && touch dist/doc/.nojekyll",
     "check-types": "tsc --noEmit",
-    "dev": "rollup --config rollup.config.js --watch",
+    "dev": "rollup --config rollup.config.mjs --watch",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
@@ -31,14 +31,14 @@
     "url": "https://github.com/nextcloud/nextcloud-auth"
   },
   "dependencies": {
-    "@nextcloud/event-bus": "^3.0.2"
+    "@nextcloud/event-bus": "^3.1.0"
   },
   "devDependencies": {
     "@nextcloud/typings": "^1.6.0",
     "@rollup/plugin-typescript": "^11.1.1",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
-    "rollup": "^2.79.1",
+    "rollup": "^3.22.0",
     "tslib": "^2.5.0",
     "typedoc": "^0.24.7",
     "typescript": "^5.0.4"
