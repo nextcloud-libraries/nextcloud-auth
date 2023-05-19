@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.1.0 - 2023-05-19
+### Fixed
+- Fixed invalid typings for `NextcloudUser` interface
+- Use explicit file extensions for ES module files
+
+### Changed
+- Current user and CSRF token are now initilized on first usage
+- Dependency updates
+
 ## 2.0.0 - 2022-08-11
 ### Added
 - Rollup as bundler
