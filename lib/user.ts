@@ -1,9 +1,3 @@
-/// <reference types="@nextcloud/typings" />
-
-declare var OC: Nextcloud.v23.OC
-	| Nextcloud.v24.OC
-	| Nextcloud.v25.OC;
-
 const getAttribute = (el: HTMLHeadElement | undefined, attribute: string): string | null => {
 	if (el) {
 		return el.getAttribute(attribute)
@@ -40,7 +34,7 @@ export function getCurrentUser(): NextcloudUser | null {
 	currentUser = {
 		uid,
 		displayName: getAttribute(head, 'data-user-displayname'),
-		isAdmin: (typeof OC === 'undefined') ? false : OC.isUserAdmin(),
+		isAdmin: !!(window as any)._oc_isadmin,
 	} as NextcloudUser
 
 	return currentUser
