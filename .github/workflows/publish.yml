@@ -8,11 +8,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: 🔒​ Check actor permission level
-        uses: skjnldsv/check-actor-permission@v2
-        with:
-          require: admin
-
       - name: 📥​ Checkout
         uses: actions/checkout@v3
 
