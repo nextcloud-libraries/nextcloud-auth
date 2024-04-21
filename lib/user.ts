@@ -1,3 +1,17 @@
+declare global {
+	interface Window {
+		_oc_isadmin?: boolean
+	}
+}
+
+export interface NextcloudUser {
+	uid: string,
+	displayName: string | null,
+	isAdmin: boolean,
+}
+
+let currentUser: NextcloudUser | null | undefined
+
 const getAttribute = (el: HTMLHeadElement | undefined, attribute: string): string | null => {
 	if (el) {
 		return el.getAttribute(attribute)
@@ -6,14 +20,9 @@ const getAttribute = (el: HTMLHeadElement | undefined, attribute: string): strin
 	return null
 }
 
-let currentUser: NextcloudUser | null | undefined = undefined
-
-export interface NextcloudUser {
-	uid: string,
-	displayName: string | null,
-	isAdmin: boolean,
-}
-
+/**
+ * Get the currently logged in Nextcloud user or null if not logged in
+ */
 export function getCurrentUser(): NextcloudUser | null {
 	if (currentUser !== undefined) {
 		return currentUser
@@ -34,7 +43,7 @@ export function getCurrentUser(): NextcloudUser | null {
 	currentUser = {
 		uid,
 		displayName: getAttribute(head, 'data-user-displayname'),
-		isAdmin: !!(window as any)._oc_isadmin,
+		isAdmin: !!window._oc_isadmin,
 	} as NextcloudUser
 
 	return currentUser

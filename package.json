@@ -17,6 +17,8 @@
     "build:doc": "typedoc --out dist/doc lib/index.ts && touch dist/doc/.nojekyll",
     "check-types": "tsc --noEmit",
     "dev": "rollup --config rollup.config.mjs --watch",
+    "lint": "eslint lib *js",
+    "lint:fix": "eslint --fix lib",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
@@ -34,8 +36,10 @@
     "@nextcloud/event-bus": "^3.2.0"
   },
   "devDependencies": {
+    "@nextcloud/eslint-config": "^8.3.0",
     "@nextcloud/typings": "^1.8.0",
     "@rollup/plugin-typescript": "^11.1.6",
+    "eslint": "^8.57.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "rollup": "^4.16.0",
