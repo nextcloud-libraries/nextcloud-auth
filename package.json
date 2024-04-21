@@ -17,11 +17,11 @@
     "build": "vite --mode production build",
     "build:doc": "typedoc --out dist/doc lib/index.ts && touch dist/doc/.nojekyll",
     "dev": "vite --mode development run --watch",
-    "dev": "rollup --config rollup.config.mjs --watch",
-    "lint": "eslint lib *js",
-    "lint:fix": "eslint --fix lib",
-    "test": "jest",
-    "test:watch": "jest --watchAll"
+    "lint": "eslint lib test *.ts",
+    "lint:fix": "eslint --fix lib test",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch"
   },
   "keywords": [
     "nextcloud"
@@ -39,10 +39,14 @@
   "devDependencies": {
     "@nextcloud/eslint-config": "^8.3.0",
     "@nextcloud/typings": "^1.8.0",
+    "@nextcloud/vite-config": "^1.2.2",
+    "@vitest/coverage-v8": "^1.5.0",
     "eslint": "^8.57.0",
+    "happy-dom": "^14.7.1",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10"
+    "vite": "^5.2.10",
+    "vitest": "^1.5.0"
   },
   "engines": {
     "node": "^20.0.0",
