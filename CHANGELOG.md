@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.3.0 - 2024-04-22
+### Added
+* feat: Use vite for transpiling and vitest for testing
+
+### Changed
+* Update NPM version to LTS version 10
+* Bump @nextcloud/event-bus from 3.1.0 to 3.2.0
+* Updated development dependencies
+
+## 2.2.0 - 2023-09-20
+### Added
+* Use the original property instead of depending on `OC` API for `isAdmin`
+
+### Changed
+* Update node engines to next LTS
+* Bump tough-cookie from 4.1.2 to 4.1.3
+* Bump semver from 6.3.0 to 6.3.1
+* Updated development dependencies
+
 ## 2.1.0 - 2023-05-19
 ### Fixed
 - Fixed invalid typings for `NextcloudUser` interface
