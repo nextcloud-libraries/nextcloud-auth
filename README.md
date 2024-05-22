@@ -6,7 +6,7 @@
 
 [![REUSE status](https://api.reuse.software/badge/github.com/nextcloud-libraries/nextcloud-auth)](https://api.reuse.software/info/github.com/nextcloud-libraries/nextcloud-auth)
 [![npm](https://img.shields.io/npm/v/@nextcloud/auth.svg)](https://www.npmjs.com/package/@nextcloud/auth)
-[![Documentation](https://img.shields.io/badge/Documentation-online-brightgreen)](https://nextcloud.github.io/nextcloud-auth/index.html)
+[![Documentation](https://img.shields.io/badge/Documentation-online-brightgreen)](https://nextcloud-libraries.github.io/nextcloud-auth/index.html)
 
 Nextcloud helpers related to authentication and the current user
 
@@ -36,4 +36,4 @@ if (user.isAdmin) {
 }
 ```
 
-For more imformation check [nextcloud.github.io/nextcloud-auth](https://nextcloud.github.io/nextcloud-auth/index.html)
+For more imformation check [nextcloud-libraries.github.io/nextcloud-auth](https://nextcloud-libraries.github.io/nextcloud-auth/index.html)
