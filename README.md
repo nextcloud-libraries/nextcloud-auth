@@ -31,4 +31,4 @@ if (user.isAdmin) {
 }
 ```
 
-For more imformation check [nextcloud-libraries.github.io/nextcloud-auth](https://nextcloud-libraries.github.io/nextcloud-auth/index.html)
+For more information check [nextcloud-libraries.github.io/nextcloud-auth](https://nextcloud-libraries.github.io/nextcloud-auth/index.html)
