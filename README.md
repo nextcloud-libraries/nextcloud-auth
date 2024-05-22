@@ -3,7 +3,7 @@
 Nextcloud helpers related to authentication and the current user
 
 [![npm](https://img.shields.io/npm/v/@nextcloud/auth.svg)](https://www.npmjs.com/package/@nextcloud/auth)
-[![Documentation](https://img.shields.io/badge/Documentation-online-brightgreen)](https://nextcloud.github.io/nextcloud-auth/index.html)
+[![Documentation](https://img.shields.io/badge/Documentation-online-brightgreen)](https://nextcloud-libraries.github.io/nextcloud-auth/index.html)
 
 ## Install
 
@@ -31,4 +31,4 @@ if (user.isAdmin) {
 }
 ```
 
-For more imformation check [nextcloud.github.io/nextcloud-auth](https://nextcloud.github.io/nextcloud-auth/index.html)
+For more imformation check [nextcloud-libraries.github.io/nextcloud-auth](https://nextcloud-libraries.github.io/nextcloud-auth/index.html)
