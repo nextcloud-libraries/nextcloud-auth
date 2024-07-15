@@ -1,3 +1,7 @@
+/**
+ * SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 import { emit } from '@nextcloud/event-bus'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
