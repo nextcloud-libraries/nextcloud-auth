@@ -34,6 +34,7 @@
     "url": "https://github.com/nextcloud/nextcloud-auth"
   },
   "dependencies": {
+    "@nextcloud/browser-storage": "^0.4.0",
     "@nextcloud/event-bus": "^3.3.1"
   },
   "devDependencies": {

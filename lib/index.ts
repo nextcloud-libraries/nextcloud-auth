@@ -7,3 +7,4 @@ export type { NextcloudUser } from './user'
 
 export { getRequestToken, onRequestTokenUpdate } from './requesttoken'
 export { getCurrentUser } from './user'
+export { getGuestNickname, setGuestNickname } from './guest'
