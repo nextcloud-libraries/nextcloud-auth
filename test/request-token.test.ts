@@ -5,20 +5,27 @@
 import { emit } from '@nextcloud/event-bus'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
-import { getRequestToken, onRequestTokenUpdate } from '../lib/index'
-
 describe('request token', () => {
 	beforeEach(() => {
-		emit('csrf-token-update', {
-			token: undefined,
-		})
+		vi.resetModules()
+		vi.resetAllMocks()
+		delete document.head.dataset.requesttoken
 	})
 
-	test('updates token via event', () => {
+	test('return null if no token found', async () => {
+		const { getRequestToken } = await import('../lib')
 		expect(getRequestToken()).toBe(null)
 	})
 
-	test('find correct value', () => {
+	test('read initial token', async () => {
+		document.head.dataset.requesttoken = 'random-token'
+		const { getRequestToken } = await import('../lib')
+		expect(getRequestToken()).toBe('random-token')
+	})
+
+	test('can update token by event', async () => {
+		const { getRequestToken } = await import('../lib')
+
 		emit('csrf-token-update', {
 			token: 'token123',
 		})
@@ -26,7 +33,8 @@ describe('request token', () => {
 		expect(getRequestToken()).toBe('token123')
 	})
 
-	test('request token observer is called', () => {
+	test('request token observer is called', async () => {
+		const { onRequestTokenUpdate } = await import('../lib')
 		const observer = vi.fn(() => { })
 
 		onRequestTokenUpdate(observer)
@@ -35,5 +43,21 @@ describe('request token', () => {
 		})
 
 		expect(observer.mock.calls.length).toBe(1)
+	})
+
+	test('handle exception in observer', async () => {
+		const spy = vi.spyOn(window.console, 'error')
+		const { onRequestTokenUpdate } = await import('../lib')
+		const observer = vi.fn(() => { throw new Error('!Error!') })
+		// silence the console
+		spy.mockImplementationOnce(() => {})
+
+		onRequestTokenUpdate(observer)
+		emit('csrf-token-update', {
+			token: 'token123',
+		})
+
+		expect(observer.mock.calls.length).toBe(1)
+		expect(spy).toHaveBeenCalledOnce()
 	})
 })
