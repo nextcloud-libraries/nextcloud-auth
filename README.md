@@ -13,21 +13,19 @@ Nextcloud helpers related to authentication and the current user
 ## Install
 
 ```sh
-yarn add @nextcloud/auth
-```
-
-```sh
 npm install @nextcloud/auth --save
 ```
 
-## Usage
+```sh
+yarn add @nextcloud/auth
+```
 
+## Usage
+For detailed information check [the package documentation](https://nextcloud-libraries.github.io/nextcloud-auth/index.html).
+
+One example usage to get the current user:
 ```ts
-import {
-  getRequestToken,
-  getCurrentUser,
-  onRequestTokenUpdate,
-} from '@nextcloud/auth'
+import { getCurrentUser } from '@nextcloud/auth'
 
 const user = getCurrentUser()
 
@@ -35,5 +33,3 @@ if (user.isAdmin) {
   // do something
 }
 ```
-
-For more information check [nextcloud-libraries.github.io/nextcloud-auth](https://nextcloud-libraries.github.io/nextcloud-auth/index.html)
