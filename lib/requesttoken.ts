@@ -19,8 +19,7 @@ const observers: CsrfTokenObserver[] = []
 export function getRequestToken(): string | null {
 	if (token === undefined) {
 		// Only on first load, try to get token from document
-		const tokenElement = document?.getElementsByTagName('head')[0]
-		token = tokenElement ? tokenElement.getAttribute('data-requesttoken') : null
+		token = document.head.dataset.requesttoken ?? null
 	}
 	return token
 }
@@ -42,7 +41,7 @@ subscribe('csrf-token-update', (e: unknown) => {
 		try {
 			observer(token!)
 		} catch (e) {
-			console.error('error updating CSRF token observer', e)
+			console.error('Error updating CSRF token observer', e)
 		}
 	})
 })
