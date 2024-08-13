@@ -6,6 +6,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.4.0 - 2024-08-13
+### Added
+* feat: Add CSP nonce handling (`getCSPNonce`)
+* feat: add guest nickname handling
+
+### Changed
+* Add SPDX headers
+* docs: Fix link to online docs
+* test: Add missing tests for request token
+* chore(deps): Bump @nextcloud/event-bus to 3.3.1
+* Updated development dependencies
+
 ## 2.3.0 - 2024-04-22
 ### Added
 * feat: Use vite for transpiling and vitest for testing
