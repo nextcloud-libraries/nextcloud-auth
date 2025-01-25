@@ -46,7 +46,7 @@
     "happy-dom": "^14.12.3",
     "typedoc": "^0.27.6",
     "typescript": "^5.7.3",
-    "vite": "^5.4.14",
+    "vite": "^6.0.11",
     "vitest": "^2.0.2"
   },
   "engines": {
