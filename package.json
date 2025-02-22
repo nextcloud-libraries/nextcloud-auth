@@ -38,7 +38,7 @@
     "@nextcloud/event-bus": "^3.3.1"
   },
   "devDependencies": {
-    "@nextcloud/eslint-config": "^8.4.1",
+    "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/typings": "^1.9.1",
     "@nextcloud/vite-config": "^2.3.1",
     "@vitest/coverage-v8": "^2.1.8",
