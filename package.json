@@ -44,7 +44,7 @@
     "@vitest/coverage-v8": "^2.1.8",
     "eslint": "^8.57.1",
     "happy-dom": "^14.12.3",
-    "typedoc": "^0.27.9",
+    "typedoc": "^0.28.1",
     "typescript": "^5.8.2",
     "vite": "^5.4.14",
     "vitest": "^2.0.2"
