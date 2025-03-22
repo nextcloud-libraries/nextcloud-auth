@@ -47,7 +47,7 @@
     "typedoc": "^0.28.1",
     "typescript": "^5.8.2",
     "vite": "^5.4.14",
-    "vitest": "^2.0.2"
+    "vitest": "^3.0.9"
   },
   "engines": {
     "node": "^20.0.0",
