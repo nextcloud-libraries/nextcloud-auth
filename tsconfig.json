@@ -1,7 +1,9 @@
 {
-  "include": ["./lib/**.ts"],
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "include": ["./lib/**/*.ts", "./*.d.ts"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "moduleResolution": "Bundler",
     "target": "ESNext",
     "module": "ESNext",
@@ -9,6 +11,7 @@
     "strict": true,
     "noImplicitAny": false,
     "outDir": "./dist",
-    "lib": ["DOM"]
+    "rootDir": "./lib",
+    "noEmit": true,
   }
 }

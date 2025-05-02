@@ -6,6 +6,6 @@ export type { CsrfTokenObserver } from './requesttoken'
 export type { NextcloudUser } from './user'
 
 export { getCSPNonce } from './csp-nonce'
-export { getGuestNickname, setGuestNickname } from './guest'
+export { getGuestUser, getGuestNickname, setGuestNickname, showGuestUserPrompt } from './guest'
 export { getRequestToken, onRequestTokenUpdate } from './requesttoken'
 export { getCurrentUser } from './user'
