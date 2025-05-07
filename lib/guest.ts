@@ -37,12 +37,12 @@ class GuestUser implements NextcloudUser {
 
 }
 
-let currentUser: GuestUser | undefined
+let currentUser: NextcloudUser | undefined
 
 /**
  * Get the currently Guest user or null if not logged in
  */
-export function getGuestUser(): GuestUser {
+export function getGuestUser(): NextcloudUser {
 	if (!currentUser) {
 		currentUser = new GuestUser()
 	}
