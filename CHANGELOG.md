@@ -6,6 +6,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.5.1 - 2025-08-123
+### Fixed
+* fix: listen to guest changes by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/803
+
 ## 2.5.0 - 2025-05-12
 ### Added
 * feat: add guest user by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/795
@@ -26,7 +30,6 @@ All notable changes to this project will be documented in this file.
 * chore(deps-dev): Bump vite from 5.4.0 to 5.4.10 by @dependabot
 * chore(deps): Bump @nextcloud/event-bus from 3.3.1 to 3.3.2 by @dependabot
 * chore(deps): Bump rollup from 4.21.0 to 4.22.4 by @dependabot
-**Full Changelog**: https://github.com/nextcloud-libraries/nextcloud-auth/compare/v2.4.0...v2.5.0
 
 ## 2.4.0 - 2024-08-13
 ### Added
