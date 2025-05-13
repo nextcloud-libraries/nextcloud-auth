@@ -4,7 +4,7 @@
  */
 import { getBuilder } from '@nextcloud/browser-storage'
 import { NextcloudUser } from './user'
-import { emit } from '@nextcloud/event-bus'
+import { emit, subscribe } from '@nextcloud/event-bus'
 
 const browserStorage = getBuilder('public').persist().build()
 
@@ -22,6 +22,11 @@ class GuestUser implements NextcloudUser {
 		this._displayName = browserStorage.getItem('guestNickname') || ''
 		this.uid = browserStorage.getItem('guestUid') || self.crypto.randomUUID()
 		this.isAdmin = false
+
+		subscribe('user:info:changed', (guest) => {
+			this._displayName = guest.displayName
+			browserStorage.setItem('guestNickname', guest.displayName || '')
+		})
 
 	}
 
