@@ -6,7 +6,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2.5.1 - 2025-08-123
+## 2.5.1 - 2025-05-13
 ### Fixed
 * fix: listen to guest changes by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/803
 
