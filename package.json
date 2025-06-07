@@ -42,7 +42,7 @@
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/typings": "^1.9.1",
     "@nextcloud/vite-config": "^2.3.5",
-    "@vitest/coverage-v8": "^3.1.4",
+    "@vitest/coverage-v8": "^3.2.2",
     "eslint": "^8.57.1",
     "happy-dom": "^17.5.6",
     "typedoc": "^0.28.5",
