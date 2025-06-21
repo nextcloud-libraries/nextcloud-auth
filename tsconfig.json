@@ -1,14 +1,15 @@
 {
-  "include": ["./lib/**.ts"],
+  "include": ["./lib"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
     "moduleResolution": "Bundler",
     "target": "ESNext",
     "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
     "declaration": true,
     "strict": true,
-    "noImplicitAny": false,
-    "outDir": "./dist",
-    "lib": ["DOM"]
+    "outDir": "./dist"
   }
 }
