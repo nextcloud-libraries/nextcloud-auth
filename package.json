@@ -51,7 +51,16 @@
     "vitest": "^3.1.3"
   },
   "engines": {
-    "node": "^20.0.0",
-    "npm": "^10.0.0"
+    "node": "^20.0.0 || ^22.0.0 || ^24.0.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": "^10.0.0"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "^22.0.0"
+    }
   }
 }
