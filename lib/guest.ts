@@ -83,8 +83,8 @@ export function setGuestNickname(nickname: string): void {
  */
 function randomUUID(): string {
 	// Use the crypto API if available
-	if (self?.crypto?.randomUUID) {
-		return self.crypto.randomUUID()
+	if (globalThis.crypto?.randomUUID) {
+		return globalThis.crypto.randomUUID()
 	}
 
 	// Generate a random UUID (version 4)
