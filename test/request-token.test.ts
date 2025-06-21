@@ -2,6 +2,7 @@
  * SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 import { emit } from '@nextcloud/event-bus'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
@@ -48,7 +49,9 @@ describe('request token', () => {
 	test('handle exception in observer', async () => {
 		const spy = vi.spyOn(window.console, 'error')
 		const { onRequestTokenUpdate } = await import('../lib')
-		const observer = vi.fn(() => { throw new Error('!Error!') })
+		const observer = vi.fn(() => {
+			throw new Error('!Error!')
+		})
 		// silence the console
 		spy.mockImplementationOnce(() => {})
 

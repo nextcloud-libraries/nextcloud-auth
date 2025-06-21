@@ -2,21 +2,20 @@
  * SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-declare global {
-	interface Window {
-		_oc_isadmin?: boolean
-	}
-}
 
 export interface NextcloudUser {
-	uid: string,
-	displayName: string | null,
-	isAdmin: boolean,
+	uid: string
+	displayName: string | null
+	isAdmin: boolean
 }
 
 let currentUser: NextcloudUser | null | undefined
 
-const getAttribute = (el: HTMLHeadElement | undefined, attribute: string): string | null => {
+/**
+ * @param el - The element
+ * @param attribute - The attribute to fetch
+ */
+function getAttribute(el: HTMLHeadElement | undefined, attribute: string): string | null {
 	if (el) {
 		return el.getAttribute(attribute)
 	}
