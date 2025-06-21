@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { getRequestToken } from './requesttoken'
+import { getRequestToken } from './requesttoken.ts'
 
 /**
  * Get the CSP nonce for script loading

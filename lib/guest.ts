@@ -1,15 +1,16 @@
-/**
+/*!
  * SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
+import type { NextcloudUser } from './user.ts'
+
 import { getBuilder } from '@nextcloud/browser-storage'
-import { NextcloudUser } from './user'
 import { emit, subscribe } from '@nextcloud/event-bus'
 
 const browserStorage = getBuilder('public').persist().build()
 
 class GuestUser implements NextcloudUser {
-
 	private _displayName: string | null
 	readonly uid: string
 	readonly isAdmin: boolean
@@ -27,7 +28,6 @@ class GuestUser implements NextcloudUser {
 			this._displayName = guest.displayName
 			browserStorage.setItem('guestNickname', guest.displayName || '')
 		})
-
 	}
 
 	get displayName(): string | null {
@@ -39,7 +39,6 @@ class GuestUser implements NextcloudUser {
 		browserStorage.setItem('guestNickname', displayName)
 		emit('user:info:changed', this)
 	}
-
 }
 
 let currentUser: NextcloudUser | undefined
@@ -64,7 +63,8 @@ export function getGuestNickname(): string | null {
 
 /**
  * Set the guest nickname for public pages
- * @param nickname The nickname to set
+ *
+ * @param nickname - The nickname to set
  */
 export function setGuestNickname(nickname: string): void {
 	if (!nickname || nickname.trim().length === 0) {

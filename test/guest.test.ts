@@ -1,10 +1,11 @@
-/**
+/*!
  * SPDX-FileCopyrightText: 2025 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+
 import { getBuilder } from '@nextcloud/browser-storage'
 import { emit } from '@nextcloud/event-bus'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock dependencies
 vi.mock('@nextcloud/browser-storage')
@@ -20,7 +21,7 @@ const mockBrowserStorage = {
 }
 
 // Mock crypto for UUID generation
-const originalCrypto = global.crypto
+const originalCrypto = globalThis.crypto
 const mockCrypto = {
 	randomUUID: vi.fn(() => 'mock-uuid-' + Math.random().toString(36).slice(2, 10)),
 }
@@ -42,8 +43,8 @@ describe('Guest User Module', () => {
 			}),
 		})
 
-		// Replace global crypto with mock
-		Object.defineProperty(global, 'crypto', {
+		// Replace globalThis crypto with mock
+		Object.defineProperty(globalThis, 'crypto', {
 			value: mockCrypto,
 			writable: true,
 		})
@@ -51,7 +52,7 @@ describe('Guest User Module', () => {
 
 	afterEach(() => {
 		// Restore original crypto
-		Object.defineProperty(global, 'crypto', {
+		Object.defineProperty(globalThis, 'crypto', {
 			value: originalCrypto,
 			writable: true,
 		})
@@ -122,12 +123,8 @@ describe('Guest User Module', () => {
 	describe('setGuestNickname', () => {
 		it('should throw an error if nickname is empty', async () => {
 			const { setGuestNickname } = await import('../lib')
-			expect(() => setGuestNickname('')).toThrow(
-				'Nickname cannot be empty',
-			)
-			expect(() => setGuestNickname('   ')).toThrow(
-				'Nickname cannot be empty',
-			)
+			expect(() => setGuestNickname('')).toThrow('Nickname cannot be empty')
+			expect(() => setGuestNickname('   ')).toThrow('Nickname cannot be empty')
 		})
 
 		it('should set the nickname and store it in browser storage', async () => {
@@ -162,7 +159,6 @@ describe('Guest User Module', () => {
 
 	describe('GuestUser class', () => {
 		it('should update displayName when set through property', async () => {
-
 			const { getGuestUser } = await import('../lib')
 			const guestUser = getGuestUser()
 			const newName = 'Property Test User'

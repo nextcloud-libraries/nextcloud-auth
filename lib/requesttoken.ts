@@ -2,10 +2,11 @@
  * SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 import { subscribe } from '@nextcloud/event-bus'
 
 export interface CsrfTokenObserver {
-	(token: string): void;
+	(token: string): void
 }
 
 let token: string | null | undefined
@@ -14,7 +15,7 @@ const observers: CsrfTokenObserver[] = []
 /**
  * Get current request token
  *
- * @return {string|null} Current request token or null if not set
+ * @return Current request token or null if not set
  */
 export function getRequestToken(): string | null {
 	if (token === undefined) {
@@ -40,8 +41,10 @@ subscribe('csrf-token-update', (e: unknown) => {
 	observers.forEach((observer) => {
 		try {
 			observer(token!)
-		} catch (e) {
-			console.error('Error updating CSRF token observer', e)
+		} catch (error) {
+			// we cannot use the logger as the logger uses this library = circular dependency
+			// eslint-disable-next-line no-console
+			console.error('Error updating CSRF token observer', error)
 		}
 	})
 })
