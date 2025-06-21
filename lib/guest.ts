@@ -16,11 +16,11 @@ class GuestUser implements NextcloudUser {
 
 	constructor() {
 		if (!browserStorage.getItem('guestUid')) {
-			browserStorage.setItem('guestUid', self.crypto.randomUUID())
+			browserStorage.setItem('guestUid', randomUUID())
 		}
 
 		this._displayName = browserStorage.getItem('guestNickname') || ''
-		this.uid = browserStorage.getItem('guestUid') || self.crypto.randomUUID()
+		this.uid = browserStorage.getItem('guestUid') || randomUUID()
 		this.isAdmin = false
 
 		subscribe('user:info:changed', (guest) => {
@@ -72,4 +72,25 @@ export function setGuestNickname(nickname: string): void {
 	}
 
 	getGuestUser().displayName = nickname
+}
+
+/**
+ * Generate a random UUID (version 4) if the crypto API is not available.
+ * If the crypto API is available, it uses the less secure `randomUUID` method.
+ * Crypto API is available in modern browsers on secure contexts (HTTPS).
+ *
+ * @return {string} A random UUID.
+ */
+function randomUUID(): string {
+	// Use the crypto API if available
+	if (self?.crypto?.randomUUID) {
+		return self.crypto.randomUUID()
+	}
+
+	// Generate a random UUID (version 4)
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+		const r = Math.random() * 16 | 0
+		const v = c === 'x' ? r : (r & 0x3 | 0x8)
+		return v.toString(16)
+	})
 }
