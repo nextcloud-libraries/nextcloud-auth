@@ -79,7 +79,7 @@ export function setGuestNickname(nickname: string): void {
  * If the crypto API is available, it uses the less secure `randomUUID` method.
  * Crypto API is available in modern browsers on secure contexts (HTTPS).
  *
- * @return {string} A random UUID.
+ * @return A random UUID.
  */
 function randomUUID(): string {
 	// Use the crypto API if available

@@ -6,6 +6,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.5.2 - 2025-07-07
+### Fixed
+* fix(files_sharing): fallback self.crypto.randomUUID by @skjnldsv in (#822)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/822]
+
+### Changed
+* chore(deps-dev): Bump happy-dom from 17.4.6 to 17.4.7 in (#805)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/805]
+* chore(deps-dev): Bump @vitest/coverage-v8 from 3.1.3 to 3.1.4 in (#808)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/808]
+* chore(deps-dev): Bump typedoc from 0.28.4 to 0.28.5 in (#810)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/810]
+* chore: fix date in CHANGELOG.md by @nickvergessen in (#807)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/807]
+* chore(deps-dev): Bump happy-dom from 17.4.7 to 17.5.6 in (#812)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/812]
+* chore(deps-dev): Bump happy-dom from 17.5.6 to 17.6.3 in (#814)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/814]
+* chore(deps-dev): Bump @vitest/coverage-v8 from 3.1.4 to 3.2.2 in (#815)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/815]
+* chore(deps-dev): Bump @vitest/coverage-v8 from 3.2.2 to 3.2.3 in (#816)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/816]
+* chore(deps-dev): Bump eslint from 8.57.1 to 9.29.0 in (#817)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/817]
+* chore(deps-dev): Bump happy-dom from 17.6.3 to 18.0.1 in (#819)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/819]
+* chore(deps-dev): Bump @vitest/coverage-v8 from 3.2.3 to 3.2.4 in (#820)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/820]
+* chore: update supported node versions by @susnux in (#823)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/823]
+
 ## 2.5.1 - 2025-05-13
 ### Fixed
 * fix: listen to guest changes by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/803
