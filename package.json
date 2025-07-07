@@ -1,6 +1,6 @@
 {
   "name": "@nextcloud/auth",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Nextcloud helpers related to authentication and the current user",
   "keywords": [
     "nextcloud"
