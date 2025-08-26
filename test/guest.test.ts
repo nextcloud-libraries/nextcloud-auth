@@ -60,7 +60,7 @@ describe('Guest User Module', () => {
 
 	describe('getGuestUser', () => {
 		it('should create a new guest user with default values when no storage exists', async () => {
-			const { getGuestUser } = await import('../lib')
+			const { getGuestUser } = await import('../lib/index.ts')
 			const guestUser = getGuestUser()
 
 			const uid = guestUser.uid
@@ -85,7 +85,7 @@ describe('Guest User Module', () => {
 			tmpBrowserStorage.guestNickname = 'Test User'
 			tmpBrowserStorage.guestUid = 'existing-uid'
 
-			const { getGuestUser } = await import('../lib')
+			const { getGuestUser } = await import('../lib/index.ts')
 
 			const guestUser = getGuestUser()
 			expect(mockBrowserStorage.getItem).toHaveBeenNthCalledWith(1, 'guestUid')
@@ -104,7 +104,7 @@ describe('Guest User Module', () => {
 
 	describe('getGuestNickname', () => {
 		it('should return null if no nickname is set', async () => {
-			const { getGuestNickname } = await import('../lib')
+			const { getGuestNickname } = await import('../lib/index.ts')
 			const nickname = getGuestNickname()
 
 			expect(nickname).toBeNull()
@@ -113,7 +113,7 @@ describe('Guest User Module', () => {
 		it('should return the nickname if set', async () => {
 			tmpBrowserStorage.guestNickname = 'Test User'
 
-			const { getGuestNickname } = await import('../lib')
+			const { getGuestNickname } = await import('../lib/index.ts')
 			const nickname = getGuestNickname()
 
 			expect(nickname).toBe('Test User')
@@ -122,7 +122,7 @@ describe('Guest User Module', () => {
 
 	describe('setGuestNickname', () => {
 		it('should throw an error if nickname is empty', async () => {
-			const { setGuestNickname } = await import('../lib')
+			const { setGuestNickname } = await import('../lib/index.ts')
 			expect(() => setGuestNickname('')).toThrow('Nickname cannot be empty')
 			expect(() => setGuestNickname('   ')).toThrow('Nickname cannot be empty')
 		})
@@ -130,7 +130,7 @@ describe('Guest User Module', () => {
 		it('should set the nickname and store it in browser storage', async () => {
 			const nickname = 'New Test User'
 
-			const { getGuestUser, setGuestNickname } = await import('../lib')
+			const { getGuestUser, setGuestNickname } = await import('../lib/index.ts')
 			setGuestNickname(nickname)
 			const guestUser = getGuestUser()
 
@@ -147,7 +147,7 @@ describe('Guest User Module', () => {
 		it('should emit a user info changed event when nickname is set', async () => {
 			const nickname = 'Event Test User'
 
-			const { setGuestNickname } = await import('../lib')
+			const { setGuestNickname } = await import('../lib/index.ts')
 			setGuestNickname(nickname)
 
 			expect(emit).toHaveBeenCalledWith(
@@ -159,7 +159,7 @@ describe('Guest User Module', () => {
 
 	describe('GuestUser class', () => {
 		it('should update displayName when set through property', async () => {
-			const { getGuestUser } = await import('../lib')
+			const { getGuestUser } = await import('../lib/index.ts')
 			const guestUser = getGuestUser()
 			const newName = 'Property Test User'
 
