@@ -6,6 +6,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.6.0 - 2025-08-26
+## Changed
+* chore(deps): various minor/patch upgrades by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/827
+* ci: update reuse.yml workflow from template by @susnux in https://github.com/nextcloud-libraries/nextcloud-auth/pull/825
+* ci: update npm-publish.yml workflow from template by @susnux in https://github.com/nextcloud-libraries/nextcloud-auth/pull/826
+
 ## 2.5.2 - 2025-07-07
 ### Fixed
 * fix(files_sharing): fallback self.crypto.randomUUID by @skjnldsv in (#822)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/822]
