@@ -14,18 +14,18 @@ describe('request token', () => {
 	})
 
 	test('return null if no token found', async () => {
-		const { getRequestToken } = await import('../lib')
+		const { getRequestToken } = await import('../lib/index.ts')
 		expect(getRequestToken()).toBe(null)
 	})
 
 	test('read initial token', async () => {
 		document.head.dataset.requesttoken = 'random-token'
-		const { getRequestToken } = await import('../lib')
+		const { getRequestToken } = await import('../lib/index.ts')
 		expect(getRequestToken()).toBe('random-token')
 	})
 
 	test('can update token by event', async () => {
-		const { getRequestToken } = await import('../lib')
+		const { getRequestToken } = await import('../lib/index.ts')
 
 		emit('csrf-token-update', {
 			token: 'token123',
@@ -35,7 +35,7 @@ describe('request token', () => {
 	})
 
 	test('request token observer is called', async () => {
-		const { onRequestTokenUpdate } = await import('../lib')
+		const { onRequestTokenUpdate } = await import('../lib/index.ts')
 		const observer = vi.fn(() => { })
 
 		onRequestTokenUpdate(observer)
@@ -48,7 +48,7 @@ describe('request token', () => {
 
 	test('handle exception in observer', async () => {
 		const spy = vi.spyOn(window.console, 'error')
-		const { onRequestTokenUpdate } = await import('../lib')
+		const { onRequestTokenUpdate } = await import('../lib/index.ts')
 		const observer = vi.fn(() => {
 			throw new Error('!Error!')
 		})

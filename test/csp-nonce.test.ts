@@ -26,13 +26,13 @@ describe('CSP nonce', () => {
 	})
 
 	test('read nonce from meta element', async () => {
-		const { getCSPNonce } = await import('../lib')
+		const { getCSPNonce } = await import('../lib/index.ts')
 		const nonce = mockNonce()
 		expect(getCSPNonce()).toBe(nonce)
 	})
 
 	test('prefer nonce over csrf token', async () => {
-		const { getCSPNonce } = await import('../lib')
+		const { getCSPNonce } = await import('../lib/index.ts')
 
 		const nonce = mockNonce()
 		document.head.dataset.requesttoken = 'csrf-token'
@@ -40,14 +40,14 @@ describe('CSP nonce', () => {
 	})
 
 	test('fall back to csrf token for legacy Nextcloud versions', async () => {
-		const { getCSPNonce } = await import('../lib')
+		const { getCSPNonce } = await import('../lib/index.ts')
 
 		document.head.dataset.requesttoken = 'csrf-token'
 		expect(getCSPNonce()).toBe(btoa('csrf-token'))
 	})
 
 	test('return undefined if neither csp nonce nor csrf token is set', async () => {
-		const { getCSPNonce } = await import('../lib')
+		const { getCSPNonce } = await import('../lib/index.ts')
 
 		expect(getCSPNonce()).toBe(undefined)
 	})
