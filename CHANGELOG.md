@@ -6,6 +6,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.5.3 - 2025-10-07
+### Changed
+* chore(deps): Bump `@nextcloud/browser-storage` to 0.5.0
+* chore(deps): various minor/patch upgrades in (#827)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/827]
+* ci: update reuse.yml workflow from template in (#825)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/825]
+* ci: update npm-publish.yml workflow from template in (#826)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/826]
+
 ## 2.5.2 - 2025-07-07
 ### Fixed
 * fix(files_sharing): fallback self.crypto.randomUUID by @skjnldsv in (#822)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/822]
