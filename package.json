@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@nextcloud/browser-storage": "^0.5.0",
-    "@nextcloud/event-bus": "^3.3.2"
+    "@nextcloud/event-bus": "^3.3.3"
   },
   "devDependencies": {
     "@nextcloud/eslint-config": "^9.0.0-rc.2",
