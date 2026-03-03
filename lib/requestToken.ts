@@ -10,17 +10,23 @@ export interface CsrfTokenObserver {
 	(token: string): void
 }
 
+_subscribeToTokenUpdates() // TODO: remove once we drop support for Nextcloud 33.0.1 and before
+
 /**
  * Get current request token
  *
  * @return Current request token or null if not set
  */
 export function getRequestToken(): string | null {
+	if (globalThis._nc_auth_requestToken) {
+		return globalThis._nc_auth_requestToken
+	}
+
 	if (globalThis.document) {
+		// for service workers or other contexts without DOM we need to safeguard this
 		return document.head.dataset.requesttoken ?? null
 	}
-	// for service workers or other contexts without DOM, we keep the token in memory
-	return globalThis._nc_auth_requestToken ?? null
+	return null
 }
 
 /**
@@ -35,12 +41,18 @@ export function setRequestToken(token: string): void {
 		throw new Error('Invalid CSRF token given', { cause: { token } })
 	}
 
-	if (globalThis.document) {
-		document.head.dataset.requesttoken = token
-	} else {
-		globalThis._nc_auth_requestToken = token
+	if (globalThis._nc_auth_requestToken === token) {
+		// token is the same as before, no need to update and especially no need to notify the observers
+		return
 	}
-	emit('csrf-token-update', { token })
+
+	globalThis._nc_auth_requestToken = token
+	if (globalThis.document) {
+		// For DOM environments we also set the token to the DOM, so it is available for legacy code
+		document.head.dataset.requesttoken = token
+	}
+
+	emit('csrf-token-update', { token, _internal: true })
 }
 
 /**
@@ -62,40 +74,34 @@ export async function fetchRequestToken(): Promise<string> {
 	return token
 }
 
-const _observers: CsrfTokenObserver[] = []
 /**
  * Add an observer which is called when the CSRF token changes
  *
  * @param observer The observer
  */
 export function onRequestTokenUpdate(observer: CsrfTokenObserver): void {
-	_subscribeToTokenUpdates()
-	_observers.push(observer)
+	subscribe('csrf-token-update', async ({ token }) => {
+		try {
+			observer(token)
+		} catch (error) {
+			// we cannot use the logger as the logger uses this library = circular dependency
+			// eslint-disable-next-line no-console
+			console.error('Error updating CSRF token observer', error)
+		}
+	})
 }
 
-let _initialized = false
 /**
  * Subscribe to token update events from server.
  *
- * This is legacy and not needed once all supported server versions use `setRequestToken` of this library.
+ * @todo - This is legacy and not needed once all supported server versions use `setRequestToken` of this library.
  */
 function _subscribeToTokenUpdates(): void {
-	if (_initialized) {
-		return
-	}
-
-	_initialized = true
 	// Listen to server event and keep token in sync
-	subscribe('csrf-token-update', (event) => {
-		setRequestToken(event.token)
-		for (const observer of _observers) {
-			try {
-				observer(event.token)
-			} catch (error) {
-				// we cannot use the logger as the logger uses this library = circular dependency
-				// eslint-disable-next-line no-console
-				console.error('Error updating CSRF token observer', error)
-			}
+	subscribe('csrf-token-update', ({ token, _internal }) => {
+		if (!_internal) {
+			// Only update the token if the event is not emitted from this library, otherwise we would end in a loop
+			setRequestToken(token)
 		}
 	})
 }

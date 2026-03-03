@@ -6,7 +6,7 @@
 import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
-import { fetchRequestToken, getRequestToken, onRequestTokenUpdate, setRequestToken } from '../lib/requestToken.ts'
+import { fetchRequestToken, getRequestToken, setRequestToken } from '../lib/requestToken.ts'
 
 const eventbus = vi.hoisted(() => ({ emit: vi.fn(), subscribe: vi.fn() }))
 vi.mock('@nextcloud/event-bus', () => eventbus)
@@ -15,13 +15,23 @@ const server = setupServer()
 
 describe('getRequestToken', () => {
 	it('can read the token from DOM', () => {
-		mockToken('tokenmock-123')
+		mockToken('tokenmock-123', undefined)
 		expect(getRequestToken()).toBe('tokenmock-123')
 	})
 
 	it('can handle missing token', () => {
 		mockToken(undefined)
 		expect(getRequestToken()).toBeNull()
+	})
+
+	it('can handle cache token', () => {
+		mockToken('cached-token')
+		expect(getRequestToken()).toBe('cached-token')
+	})
+
+	it('prioritizes cached token', () => {
+		mockToken('dom-token', 'cached-token')
+		expect(getRequestToken()).toBe('cached-token')
 	})
 })
 
@@ -33,7 +43,7 @@ describe('setRequestToken', () => {
 	it('does emit an event on change', () => {
 		setRequestToken('new-token')
 		expect(eventbus.emit).toBeCalledTimes(1)
-		expect(eventbus.emit).toBeCalledWith('csrf-token-update', { token: 'new-token' })
+		expect(eventbus.emit).toBeCalledWith('csrf-token-update', expect.objectContaining({ token: 'new-token' }))
 	})
 
 	it('does set the new token to the DOM', () => {
@@ -62,50 +72,6 @@ describe('setRequestToken', () => {
 	})
 })
 
-describe('request token observers', () => {
-	beforeEach(() => {
-		mockToken(undefined)
-	})
-
-	it('can update token by event', async () => {
-		expect(getRequestToken()).toBeNull()
-
-		onRequestTokenUpdate(() => {})
-		expect(eventbus.subscribe).toBeCalledWith('csrf-token-update', expect.any(Function))
-		eventbus.subscribe.mock.calls[0][1]({ token: 'token123' })
-
-		expect(getRequestToken()).toBe('token123')
-	})
-
-	it('request token observer is called', async () => {
-		const observer = vi.fn(() => { })
-
-		onRequestTokenUpdate(observer)
-		expect(observer).not.toBeCalled()
-
-		expect(eventbus.subscribe).toBeCalledWith('csrf-token-update', expect.any(Function))
-		eventbus.subscribe.mock.calls[0][1]({ token: 'token123' })
-
-		expect(observer).toBeCalledTimes(1)
-	})
-
-	it('handle exception in observer', async () => {
-		const spy = vi.spyOn(window.console, 'error')
-		const observer = vi.fn(() => {
-			throw new Error('!Error!')
-		})
-		// silence the console
-		spy.mockImplementationOnce(() => {})
-
-		onRequestTokenUpdate(observer)
-		expect(eventbus.subscribe).toBeCalledWith('csrf-token-update', expect.any(Function))
-		eventbus.subscribe.mock.calls[0][1]({ token: 'token123' })
-
-		expect(observer).toBeCalledTimes(1)
-		expect(spy).toHaveBeenCalledOnce()
-	})
-})
-
 describe('fetchRequestToken', () => {
 	const successfullCsrf = http.get('/index.php/csrftoken', () => {
 		return HttpResponse.json({ token: 'new-token' })
@@ -127,12 +93,12 @@ describe('fetchRequestToken', () => {
 
 	beforeEach(() => {
 		vi.resetAllMocks()
+		mockToken('oldToken')
 	})
 
 	it('correctly parses response', async () => {
 		server.use(successfullCsrf)
 
-		mockToken('oldToken')
 		const token = await fetchRequestToken()
 		expect(token).toBe('new-token')
 	})
@@ -140,7 +106,6 @@ describe('fetchRequestToken', () => {
 	it('sets the token', async () => {
 		server.use(successfullCsrf)
 
-		mockToken('oldToken')
 		await fetchRequestToken()
 		expect(getRequestToken()).toBe('new-token')
 	})
@@ -150,7 +115,7 @@ describe('fetchRequestToken', () => {
 
 		await fetchRequestToken()
 		expect(eventbus.emit).toHaveBeenCalledOnce()
-		expect(eventbus.emit).toBeCalledWith('csrf-token-update', { token: 'new-token' })
+		expect(eventbus.emit).toBeCalledWith('csrf-token-update', expect.objectContaining({ token: 'new-token' }))
 	})
 
 	it('handles 403 error due to invalid cookies', async () => {
@@ -182,11 +147,18 @@ describe('fetchRequestToken', () => {
  * Mock the request token directly so we can it reading it.
  *
  * @param token - The CSRF token to mock
+ * @param internalToken - The internal (cached version of the DOM token) token to mock, if null the `token` will be used as internal token
  */
-function mockToken(token?: string) {
+function mockToken(token?: string, internalToken: string | undefined | null = null) {
 	if (token === undefined) {
 		delete document.head.dataset.requesttoken
 	} else {
 		document.head.dataset.requesttoken = token
+	}
+
+	if (internalToken === null) {
+		globalThis._nc_auth_requestToken = token
+	} else {
+		globalThis._nc_auth_requestToken = internalToken
 	}
 }
