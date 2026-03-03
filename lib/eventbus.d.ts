@@ -7,6 +7,7 @@ import type { NextcloudUser } from './user.ts'
 
 declare module '@nextcloud/event-bus' {
 	export interface NextcloudEvents {
+		'csrf-token-update': { token: string }
 		// mapping of 'event name' => 'event type'
 		'user:info:changed': NextcloudUser
 	}
