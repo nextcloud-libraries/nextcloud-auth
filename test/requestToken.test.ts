@@ -6,7 +6,7 @@
 import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
-import { fetchRequestToken, getRequestToken, onRequestTokenUpdate, setRequestToken } from '../lib/requesttoken.ts'
+import { fetchRequestToken, getRequestToken, onRequestTokenUpdate, setRequestToken } from '../lib/requestToken.ts'
 
 const eventbus = vi.hoisted(() => ({ emit: vi.fn(), subscribe: vi.fn() }))
 vi.mock('@nextcloud/event-bus', () => eventbus)

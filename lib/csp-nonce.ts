@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { getRequestToken } from './requesttoken.ts'
+import { getRequestToken } from './requestToken.ts'
 
 /**
  * Get the CSP nonce for script loading
@@ -18,7 +18,7 @@ import { getRequestToken } from './requesttoken.ts'
  */
 export function getCSPNonce(): string | undefined {
 	const meta = document?.querySelector<HTMLMetaElement>('meta[name="csp-nonce"]')
-	// backwards compatibility with older Nextcloud versions
+	// backwards compatibility with older Nextcloud versions (before Nextcloud 30)
 	if (!meta) {
 		const token = getRequestToken()
 		return token ? btoa(token) : undefined

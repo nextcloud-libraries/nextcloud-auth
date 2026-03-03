@@ -20,7 +20,7 @@ export function getRequestToken(): string | null {
 		return document.head.dataset.requesttoken ?? null
 	}
 	// for service workers or other contexts without DOM, we keep the token in memory
-	return globalThis._nc_auth_requesttoken ?? null
+	return globalThis._nc_auth_requestToken ?? null
 }
 
 /**
@@ -38,7 +38,7 @@ export function setRequestToken(token: string): void {
 	if (globalThis.document) {
 		document.head.dataset.requesttoken = token
 	} else {
-		globalThis._nc_auth_requesttoken = token
+		globalThis._nc_auth_requestToken = token
 	}
 	emit('csrf-token-update', { token })
 }
