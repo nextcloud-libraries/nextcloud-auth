@@ -1,5 +1,5 @@
 {
-  "include": ["./lib"],
+  "include": ["./lib", "./*.d.ts"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
