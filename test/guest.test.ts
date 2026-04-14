@@ -3,82 +3,47 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { getBuilder } from '@nextcloud/browser-storage'
 import { emit } from '@nextcloud/event-bus'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-
-// Mock dependencies
-vi.mock('@nextcloud/browser-storage')
-vi.mock('@nextcloud/event-bus')
-
-let tmpBrowserStorage = {}
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { getGuestUser, resetGuestUser } from '../lib/guest.ts'
 
 // Mock browser storage
-const mockBrowserStorage = {
+let tmpBrowserStorage: Record<string, string> = {}
+const mockBrowserStorage = vi.hoisted(() => ({
 	getItem: vi.fn((key) => tmpBrowserStorage[key]),
 	setItem: vi.fn((key, value) => { tmpBrowserStorage[key] = value }),
 	removeItem: vi.fn((key) => { delete tmpBrowserStorage[key] }),
-}
+}))
 
-// Mock crypto for UUID generation
-const originalCrypto = globalThis.crypto
-const mockCrypto = {
-	randomUUID: vi.fn(() => 'mock-uuid-' + Math.random().toString(36).slice(2, 10)),
-}
+// Mock dependencies
+vi.mock('@nextcloud/event-bus', { spy: true })
+vi.mock('@nextcloud/browser-storage', () => ({
+	getBuilder: vi.fn(() => ({
+		persist: () => ({ build: () => mockBrowserStorage }),
+	})),
+}))
 
 describe('Guest User Module', () => {
 	beforeEach(() => {
 		// Setup mocks
 		vi.clearAllMocks()
-		vi.resetModules()
+		resetGuestUser()
 
 		// Clear temporary browser storage
 		tmpBrowserStorage = {}
-
-		// Mock getBuilder to return our mockBrowserStorage
-		vi.mocked(getBuilder).mockReturnValue({
-			persist: () => ({
-				// @ts-expect-error Mocking builder
-				build: () => mockBrowserStorage,
-			}),
-		})
-
-		// Replace globalThis crypto with mock
-		Object.defineProperty(globalThis, 'crypto', {
-			value: mockCrypto,
-			writable: true,
-		})
-	})
-
-	afterEach(() => {
-		// Restore original crypto
-		Object.defineProperty(globalThis, 'crypto', {
-			value: originalCrypto,
-			writable: true,
-		})
 	})
 
 	describe('getGuestUser', () => {
 		it('should create a new guest user with default values when no storage exists', async () => {
-			const { getGuestUser } = await import('../lib/index.ts')
 			const guestUser = getGuestUser()
 
-			const uid = guestUser.uid
-
-			expect(guestUser.uid).toBeTruthy()
+			expect(guestUser.uid).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i)
 			expect(guestUser.displayName).toBe('')
 			expect(guestUser.isAdmin).toBe(false)
 			expect(mockBrowserStorage.getItem).toHaveBeenNthCalledWith(1, 'guestUid')
 			expect(mockBrowserStorage.getItem).toHaveBeenNthCalledWith(2, 'guestNickname')
-			expect(mockBrowserStorage.setItem).toHaveBeenCalledWith('guestUid', uid)
-
 			expect(mockBrowserStorage.getItem).toHaveBeenNthCalledWith(3, 'guestUid')
-
-			expect(guestUser.uid).toBe(uid)
-			expect(guestUser.displayName).toBe('')
-			expect(guestUser.isAdmin).toBe(false)
-
-			expect(mockCrypto.randomUUID).toHaveBeenCalledOnce()
+			expect(mockBrowserStorage.setItem).toHaveBeenCalledWith('guestUid', guestUser.uid)
 		})
 
 		it('should return the existing guest user if already created', async () => {

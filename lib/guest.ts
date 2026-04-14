@@ -75,6 +75,17 @@ export function setGuestNickname(nickname: string): void {
 }
 
 /**
+ * Reset the guest user state.
+ *
+ * @internal
+ */
+export function resetGuestUser(): void {
+	currentUser = undefined
+	browserStorage.removeItem('guestUid')
+	browserStorage.removeItem('guestNickname')
+}
+
+/**
  * Generate a random UUID (version 4) if the crypto API is not available.
  * If the crypto API is available, it uses the less secure `randomUUID` method.
  * Crypto API is available in modern browsers on secure contexts (HTTPS).

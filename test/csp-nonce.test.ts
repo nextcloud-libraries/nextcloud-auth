@@ -2,14 +2,15 @@
  * SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-import { randomBytes } from 'crypto'
+
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 
 /**
  * Mock `<meta>` element with nonce
  */
 function mockNonce() {
-	const nonce = randomBytes(16).toString('base64')
+	const bytes = globalThis.crypto.getRandomValues(new Uint8Array(16))
+	const nonce = bytes.toBase64()
 	const el = document.createElement('meta')
 	el.name = 'csp-nonce'
 	el.nonce = nonce

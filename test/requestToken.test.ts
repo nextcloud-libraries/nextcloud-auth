@@ -3,15 +3,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import * as eventbus from '@nextcloud/event-bus'
 import { http, HttpResponse } from 'msw'
-import { setupServer } from 'msw/node'
+import { setupWorker } from 'msw/browser'
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { fetchRequestToken, getRequestToken, setRequestToken } from '../lib/requestToken.ts'
 
-const eventbus = vi.hoisted(() => ({ emit: vi.fn(), subscribe: vi.fn() }))
-vi.mock('@nextcloud/event-bus', () => eventbus)
+vi.mock('@nextcloud/event-bus', { spy: true })
 
-const server = setupServer()
+const server = setupWorker()
 
 describe('getRequestToken', () => {
 	it('can read the token from DOM', () => {
@@ -42,8 +42,8 @@ describe('setRequestToken', () => {
 
 	it('does emit an event on change', () => {
 		setRequestToken('new-token')
-		expect(eventbus.emit).toBeCalledTimes(1)
-		expect(eventbus.emit).toBeCalledWith('csrf-token-update', expect.objectContaining({ token: 'new-token' }))
+		expect(eventbus.emit).toHaveBeenCalledTimes(1)
+		expect(eventbus.emit).toHaveBeenCalledWith('csrf-token-update', expect.objectContaining({ token: 'new-token' }))
 	})
 
 	it('does set the new token to the DOM', () => {
@@ -86,9 +86,10 @@ describe('fetchRequestToken', () => {
 		return new HttpResponse(null, { type: 'error' })
 	})
 
-	beforeAll(() => {
-		server.listen()
-		;(window as unknown as Record<string, unknown>)._oc_webroot = ''
+	beforeAll(async () => {
+		// @ts-expect-error - mocking global variable for testing
+		globalThis._oc_webroot = ''
+		await server.start()
 	})
 
 	beforeEach(() => {
@@ -97,7 +98,7 @@ describe('fetchRequestToken', () => {
 	})
 
 	it('correctly parses response', async () => {
-		server.use(successfullCsrf)
+		server.resetHandlers(successfullCsrf)
 
 		const token = await fetchRequestToken()
 		expect(token).toBe('new-token')
@@ -115,14 +116,14 @@ describe('fetchRequestToken', () => {
 
 		await fetchRequestToken()
 		expect(eventbus.emit).toHaveBeenCalledOnce()
-		expect(eventbus.emit).toBeCalledWith('csrf-token-update', expect.objectContaining({ token: 'new-token' }))
+		expect(eventbus.emit).toHaveBeenCalledWith('csrf-token-update', expect.objectContaining({ token: 'new-token' }))
 	})
 
 	it('handles 403 error due to invalid cookies', async () => {
 		server.use(forbiddenCsrf)
 
 		mockToken('oldToken')
-		await expect(() => fetchRequestToken()).rejects.toThrowError('Could not fetch CSRF token from API')
+		await expect(() => fetchRequestToken()).rejects.toThrow('Could not fetch CSRF token from API')
 		expect(getRequestToken()).toBe('oldToken')
 	})
 
@@ -130,7 +131,7 @@ describe('fetchRequestToken', () => {
 		server.use(serverErrorCsrf)
 
 		mockToken('oldToken')
-		await expect(() => fetchRequestToken()).rejects.toThrowError('Could not fetch CSRF token from API')
+		await expect(() => fetchRequestToken()).rejects.toThrow('Could not fetch CSRF token from API')
 		expect(getRequestToken()).toBe('oldToken')
 	})
 
