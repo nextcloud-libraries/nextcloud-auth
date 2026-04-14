@@ -5,13 +5,13 @@
   "keywords": [
     "nextcloud"
   ],
-  "homepage": "https://github.com/nextcloud/nextcloud-auth#readme",
+  "homepage": "https://github.com/nextcloud-libraries/nextcloud-auth#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nextcloud/nextcloud-auth"
+    "url": "https://github.com/nextcloud-libraries/nextcloud-auth"
   },
   "license": "GPL-3.0-or-later",
-  "author": "Christoph Wurst",
+  "author": "Nextcloud GmbH and Nextcloud contributors",
   "type": "module",
   "exports": {
     "types": "./dist/index.d.ts",
