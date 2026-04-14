@@ -1,5 +1,5 @@
 {
-  "include": ["./lib"],
+  "include": ["./lib", "./*.d.ts"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
@@ -10,6 +10,7 @@
     "lib": ["DOM", "ESNext"],
     "declaration": true,
     "strict": true,
+    "rootDir": "./lib",
     "outDir": "./dist"
   }
 }

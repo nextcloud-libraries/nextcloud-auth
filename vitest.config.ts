@@ -1,22 +1,23 @@
-/**
+/*!
  * SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import type { UserConfig } from 'vite'
+import { playwright } from '@vitest/browser-playwright'
+import { defineConfig } from 'vitest/config'
 
-import viteConfig from './vite.config'
-
-export default async (env) => {
-	const config = typeof viteConfig === 'function' ? await viteConfig(env) : viteConfig
-
-	return {
-		...config,
-		test: {
-			environment: 'happy-dom',
-			coverage: {
-				reporter: ['text', 'lcov'],
-			},
+export default defineConfig({
+	test: {
+		browser: {
+			enabled: true,
+			headless: true,
+			provider: playwright(),
+			instances: [
+				{ browser: 'chromium' },
+			],
 		},
-	} as UserConfig
-}
+		coverage: {
+			reporter: ['text', 'lcov'],
+		},
+	},
+})
