@@ -6,55 +6,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.6.0 - 2026-04-14
+### Added
+* feat: add `setRequestToken` and `fetchRequestToken` methods \([\#900](https://github.com/nextcloud-libraries/nextcloud-auth/pull/900)\)
+
+### Changed
+* Bump `@nextcloud/event-bus` to 3.3.3
+* chore: use correct package metadata \([\#924](https://github.com/nextcloud-libraries/nextcloud-auth/pull/924)\)
+* chore: revert ESLint to v9 to fix linter \([\#901](https://github.com/nextcloud-libraries/nextcloud-auth/pull/901)\)
+* chore: update Node and NPM dev versions to align with apps \([\#854](https://github.com/nextcloud-libraries/nextcloud-auth/pull/854)\)
+* ci: update all workflow templates from organization template repository \([\#918](https://github.com/nextcloud-libraries/nextcloud-auth/pull/918)\)
+
 ## 2.5.3 - 2025-10-07
 ### Changed
 * chore(deps): Bump `@nextcloud/browser-storage` to 0.5.0
-* chore(deps): various minor/patch upgrades in (#827)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/827]
-* ci: update reuse.yml workflow from template in (#825)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/825]
-* ci: update npm-publish.yml workflow from template in (#826)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/826]
+* chore(deps): various minor/patch upgrades \([#827](https://github.com/nextcloud-libraries/nextcloud-auth/pull/827)\)
+* ci: update reuse.yml workflow from template \([#825](https://github.com/nextcloud-libraries/nextcloud-auth/pull/825)\)
+* ci: update npm-publish.yml workflow from template \([#826](https://github.com/nextcloud-libraries/nextcloud-auth/pull/826)\)
 
 ## 2.5.2 - 2025-07-07
 ### Fixed
-* fix(files_sharing): fallback self.crypto.randomUUID by @skjnldsv in (#822)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/822]
+* fix(files_sharing): fallback self.crypto.randomUUID \([#822](https://github.com/nextcloud-libraries/nextcloud-auth/pull/822)\)
 
 ### Changed
-* chore(deps-dev): Bump happy-dom from 17.4.6 to 17.4.7 in (#805)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/805]
-* chore(deps-dev): Bump @vitest/coverage-v8 from 3.1.3 to 3.1.4 in (#808)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/808]
-* chore(deps-dev): Bump typedoc from 0.28.4 to 0.28.5 in (#810)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/810]
-* chore: fix date in CHANGELOG.md by @nickvergessen in (#807)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/807]
-* chore(deps-dev): Bump happy-dom from 17.4.7 to 17.5.6 in (#812)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/812]
-* chore(deps-dev): Bump happy-dom from 17.5.6 to 17.6.3 in (#814)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/814]
-* chore(deps-dev): Bump @vitest/coverage-v8 from 3.1.4 to 3.2.2 in (#815)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/815]
-* chore(deps-dev): Bump @vitest/coverage-v8 from 3.2.2 to 3.2.3 in (#816)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/816]
-* chore(deps-dev): Bump eslint from 8.57.1 to 9.29.0 in (#817)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/817]
-* chore(deps-dev): Bump happy-dom from 17.6.3 to 18.0.1 in (#819)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/819]
-* chore(deps-dev): Bump @vitest/coverage-v8 from 3.2.3 to 3.2.4 in (#820)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/820]
-* chore: update supported node versions by @susnux in (#823)[https://github.com/nextcloud-libraries/nextcloud-auth/pull/823]
+* chore: fix date in CHANGELOG.md \([#807](https://github.com/nextcloud-libraries/nextcloud-auth/pull/807)\)
+* chore: update supported node versions \([#823](https://github.com/nextcloud-libraries/nextcloud-auth/pull/823)\)
+* Update development dependencies
 
 ## 2.5.1 - 2025-05-13
 ### Fixed
-* fix: listen to guest changes by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/803
+* fix: listen to guest changes \([\#803](https://github.com/nextcloud-libraries/nextcloud-auth/pull/803)\)
 
 ## 2.5.0 - 2025-05-12
 ### Added
-* feat: add guest user by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/795
+* feat: add guest user \([\#795](https://github.com/nextcloud-libraries/nextcloud-auth/pull/795)\)
 
 ### Fixed
-* fix: returns `NextcloudUser` instead of `GuestUser` by @skjnldsv in https://github.com/nextcloud-libraries/nextcloud-auth/pull/799
+* fix: returns `NextcloudUser` instead of `GuestUser` \([\#799](https://github.com/nextcloud-libraries/nextcloud-auth/pull/799)\)
 
 ### Changed
-* chore: Update workflows by @susnux in https://github.com/nextcloud-libraries/nextcloud-auth/pull/678
-* chore(deps-dev): Bump @nextcloud/eslint-config from 8.4.1 to 8.4.2 by @dependabot
-* chore(deps-dev): Bump @nextcloud/vite-config from 2.2.2 to 2.3.5 by @dependabot
-* chore(deps-dev): Bump @vitest/coverage-v8 from 2.0.5 to 2.1.8 by @dependabot
-* chore(deps-dev): Bump elliptic from 6.5.5 to 6.6.0 by @dependabot
-* chore(deps-dev): Bump eslint from 8.57.0 to 8.57.1 by @dependabot
-* chore(deps-dev): Bump happy-dom from 14.12.3 to 17.4.4 by @dependabot
-* chore(deps-dev): Bump typedoc from 0.26.10 to 0.28.4 by @dependabot
-* chore(deps-dev): Bump typescript from 5.5.4 to 5.8.3 by @dependabot
-* chore(deps-dev): Bump vite from 5.4.0 to 5.4.10 by @dependabot
-* chore(deps): Bump @nextcloud/event-bus from 3.3.1 to 3.3.2 by @dependabot
-* chore(deps): Bump rollup from 4.21.0 to 4.22.4 by @dependabot
+* chore: Update workflows \([\#678](https://github.com/nextcloud-libraries/nextcloud-auth/pull/678)\)
+* chore(deps): Bump @nextcloud/event-bus from 3.3.1 to 3.3.2
+* Updated development dependencies
 
 ## 2.4.0 - 2024-08-13
 ### Added
@@ -93,7 +86,7 @@ All notable changes to this project will be documented in this file.
 - Use explicit file extensions for ES module files
 
 ### Changed
-- Current user and CSRF token are now initilized on first usage
+- Current user and CSRF token are now initialized on first usage
 - Dependency updates
 
 ## 2.0.0 - 2022-08-11
