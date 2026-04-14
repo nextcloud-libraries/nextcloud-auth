@@ -6,6 +6,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.6.0 - 2026-04-14
+### Added
+* feat: add `setRequestToken` and `fetchRequestToken` methods \([\#900](https://github.com/nextcloud-libraries/nextcloud-auth/pull/900)\)
+
+### Changed
+* Bump `@nextcloud/event-bus` to 3.3.3
+* chore: use correct package metadata \([\#924](https://github.com/nextcloud-libraries/nextcloud-auth/pull/924)\)
+* chore: revert ESLint to v9 to fix linter \([\#901](https://github.com/nextcloud-libraries/nextcloud-auth/pull/901)\)
+* chore: update Node and NPM dev versions to align with apps \([\#854](https://github.com/nextcloud-libraries/nextcloud-auth/pull/854)\)
+* ci: update all workflow templates from organization template repository \([\#918](https://github.com/nextcloud-libraries/nextcloud-auth/pull/918)\)
+
 ## 2.5.3 - 2025-10-07
 ### Changed
 * chore(deps): Bump `@nextcloud/browser-storage` to 0.5.0
