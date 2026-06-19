@@ -98,7 +98,7 @@ export function resetGuestUser(): void {
  * `crypto.getRandomValues()`, and finally to a non-cryptographic
  * `Math.random()` implementation when needed.
  *
- * @returns A UUID string.
+ * @return A UUID string.
  */
 function randomUUID(): string {
 	// Use the native crypto API when available.
