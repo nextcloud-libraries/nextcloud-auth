@@ -45,7 +45,7 @@
     "@nextcloud/vite-config": "^2.5.4",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.4",
-    "eslint": "^10.6.0",
+    "eslint": "^10.7.0",
     "msw": "^2.15.0",
     "typedoc": "^0.28.19",
     "typescript": "^6.0.3",
