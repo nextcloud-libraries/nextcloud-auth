@@ -48,7 +48,7 @@
     "eslint": "^10.7.0",
     "msw": "^2.15.0",
     "typedoc": "^0.28.20",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vite": "^7.3.5",
     "vitest": "^4.0.7"
   },
