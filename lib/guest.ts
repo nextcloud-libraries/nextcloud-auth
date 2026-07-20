@@ -10,6 +10,12 @@ import { emit, subscribe } from '@nextcloud/event-bus'
 
 const browserStorage = getBuilder('public').persist().build()
 
+/**
+ * Client-side guest user implementation for public pages.
+ *
+ * Persists a generated guest UID and nickname in browser storage and
+ * emits updates when the guest display name changes.
+ */
 class GuestUser implements NextcloudUser {
 	private _displayName: string | null
 	readonly uid: string
@@ -44,7 +50,7 @@ class GuestUser implements NextcloudUser {
 let currentUser: NextcloudUser | undefined
 
 /**
- * Get the currently Guest user or null if not logged in
+ * Get the current guest user for public pages.
  */
 export function getGuestUser(): NextcloudUser {
 	if (!currentUser) {
@@ -55,14 +61,14 @@ export function getGuestUser(): NextcloudUser {
 }
 
 /**
- * Get the guest nickname for public pages
+ * Get the guest nickname for public pages.
  */
 export function getGuestNickname(): string | null {
-	return getGuestUser()?.displayName || null
+	return getGuestUser().displayName || null
 }
 
 /**
- * Set the guest nickname for public pages
+ * Set the guest nickname for public pages.
  *
  * @param nickname - The nickname to set
  */
@@ -86,19 +92,41 @@ export function resetGuestUser(): void {
 }
 
 /**
- * Generate a random UUID (version 4) if the crypto API is not available.
- * If the crypto API is available, it uses the less secure `randomUUID` method.
- * Crypto API is available in modern browsers on secure contexts (HTTPS).
+ * Generate a UUID v4 for identifying a guest user.
  *
- * @return A random UUID.
+ * Uses `crypto.randomUUID()` when available, falls back to
+ * `crypto.getRandomValues()`, and finally to a non-cryptographic
+ * `Math.random()` implementation when needed.
+ *
+ * @return A UUID string.
  */
 function randomUUID(): string {
-	// Use the crypto API if available
+	// Use the native crypto API when available.
 	if (globalThis.crypto?.randomUUID) {
 		return globalThis.crypto.randomUUID()
 	}
 
-	// Generate a random UUID (version 4)
+	// Fall back to generating a UUID v4 from random bytes.
+	if (globalThis.crypto?.getRandomValues) {
+		const bytes = new Uint8Array(16)
+		globalThis.crypto.getRandomValues(bytes)
+
+		// Set the UUID version (4) and variant bits.
+		bytes[6] = (bytes[6] & 0x0f) | 0x40
+		bytes[8] = (bytes[8] & 0x3f) | 0x80
+
+		const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0'))
+
+		return [
+			hex.slice(0, 4).join(''),
+			hex.slice(4, 6).join(''),
+			hex.slice(6, 8).join(''),
+			hex.slice(8, 10).join(''),
+			hex.slice(10, 16).join(''),
+		].join('-')
+	}
+
+	// Final fallback for environments without the crypto API.
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
 		const r = Math.random() * 16 | 0
 		const v = c === 'x' ? r : (r & 0x3 | 0x8)
