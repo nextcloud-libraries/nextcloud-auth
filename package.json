@@ -46,7 +46,7 @@
     "@vitest/browser-playwright": "^5.1.0",
     "@vitest/coverage-v8": "^5.1.0",
     "eslint": "^10.14.0",
-    "msw": "^3.0.3",
+    "msw": "^3.0.5",
     "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
     "vite": "^7.3.7",
